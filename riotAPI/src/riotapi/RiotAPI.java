@@ -4,6 +4,8 @@
  * and open the template in the editor.
  */
 package riotapi;
+import java.net.*;
+import java.io.*;
 
 /**
  *
@@ -11,13 +13,34 @@ package riotapi;
  */
 public class RiotAPI
 {
+    public static String raw;
+    private int id;
+    private int accountid;
+    private String name;
+    private int profileIconId;
+    private int revisionDate;
+    private int summonerlevel;
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args)
+    public RiotAPI()
     {
-        // TODO code application logic here
+        
     }
-    
+
+    public static void initial() throws Exception
+    {
+        URL yahoo = new URL("https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/petrovic258?api_key=RGAPI-1a087187-8932-4415-8e16-aa6f1406cf55");
+        URLConnection yc = yahoo.openConnection();
+        BufferedReader in = new BufferedReader(
+                new InputStreamReader(
+                        yc.getInputStream()));
+        String inputLine;
+
+        while ((inputLine = in.readLine()) != null)
+        {
+            raw = inputLine;
+        }
+        in.close();
+        System.out.append(raw);
+    }
+
 }
