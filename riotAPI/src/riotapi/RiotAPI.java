@@ -1,4 +1,5 @@
 package riotapi;
+
 import java.net.*;
 import java.io.*;
 import org.json.*;
@@ -9,6 +10,7 @@ import org.json.*;
  */
 public class RiotAPI
 {
+
     public static JSONObject raw;
     private static int id;
     private static int accountid;
@@ -16,16 +18,19 @@ public class RiotAPI
     private static int profileIconId;
     private static int revisionDate;
     private static int summonerlevel;
+    private static URLstore store = new URLstore();
+    private static String region;
+    private static String inputname;
 
     public RiotAPI()
     {
         
     }
 
-    public static void connect() throws Exception
+    public static String summonerData() throws Exception
     {
-        URL yahoo = new URL("https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/petrovic258?api_key=RGAPI-1a087187-8932-4415-8e16-aa6f1406cf55");
-        URLConnection yc = yahoo.openConnection();
+        URL api = new URL(store.summoner(inputname, region));
+        URLConnection yc = api.openConnection();
         BufferedReader in = new BufferedReader(
                 new InputStreamReader(
                         yc.getInputStream()));
@@ -35,15 +40,28 @@ public class RiotAPI
         {
             raw = new JSONObject(inputLine);
         }
-        in.close();     
+        in.close();
+        summonerParse(raw);
+        return ("Name: " + name + "\nID: " + id + "\nAccountID: " + accountid + "\nIcon ID: " + profileIconId + "\nRevisionDate: " + revisionDate + "\nLevel: " + summonerlevel);
+
+    }
+
+    private static void summonerParse(JSONObject raw)
+    {
         id = raw.getInt("id");
         accountid = raw.getInt("accountId");
         name = raw.getString("name");
         profileIconId = raw.getInt("profileIconId");
         revisionDate = raw.getInt("revisionDate");
         summonerlevel = raw.getInt("summonerLevel");
-        System.out.println("Name: "+name+"\nID: "+id+"\nAccountID: "+accountid+"\nIcon ID: "+profileIconId+"\nrevisionDate: "+revisionDate+"\nLevel: "+summonerlevel);
-        
     }
-
+    
+    public static void setRegion(String region_)
+    {
+        region = region_;
+    }
+    public static void setInputname(String name)
+    {
+        inputname = name;
+    }
 }
