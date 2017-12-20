@@ -1,11 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package riotapi;
 import java.net.*;
 import java.io.*;
+import org.json.*;
 
 /**
  *
@@ -13,20 +9,20 @@ import java.io.*;
  */
 public class RiotAPI
 {
-    public static String raw;
-    private int id;
-    private int accountid;
-    private String name;
-    private int profileIconId;
-    private int revisionDate;
-    private int summonerlevel;
+    public static JSONObject raw;
+    private static int id;
+    private static int accountid;
+    private static String name;
+    private static int profileIconId;
+    private static int revisionDate;
+    private static int summonerlevel;
 
     public RiotAPI()
     {
         
     }
 
-    public static void initial() throws Exception
+    public static void connect() throws Exception
     {
         URL yahoo = new URL("https://euw1.api.riotgames.com/lol/summoner/v3/summoners/by-name/petrovic258?api_key=RGAPI-1a087187-8932-4415-8e16-aa6f1406cf55");
         URLConnection yc = yahoo.openConnection();
@@ -37,10 +33,17 @@ public class RiotAPI
 
         while ((inputLine = in.readLine()) != null)
         {
-            raw = inputLine;
+            raw = new JSONObject(inputLine);
         }
-        in.close();
-        System.out.append(raw);
+        in.close();     
+        id = raw.getInt("id");
+        accountid = raw.getInt("accountId");
+        name = raw.getString("name");
+        profileIconId = raw.getInt("profileIconId");
+        revisionDate = raw.getInt("revisionDate");
+        summonerlevel = raw.getInt("summonerLevel");
+        System.out.println("Name: "+name+"\nID: "+id+"\nAccountID: "+accountid+"\nIcon ID: "+profileIconId+"\nrevisionDate: "+revisionDate+"\nLevel: "+summonerlevel);
+        
     }
 
 }

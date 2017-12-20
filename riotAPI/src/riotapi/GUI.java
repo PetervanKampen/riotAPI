@@ -53,7 +53,7 @@ public class GUI extends javax.swing.JFrame
     {
         try
         {
-            RiotAPI.initial();
+            RiotAPI.connect();
         }
         catch(Exception e)
         {
