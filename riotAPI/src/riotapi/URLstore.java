@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package riotapi;
+import java.io.*;
 
 /**
  *
@@ -13,6 +14,11 @@ public class URLstore
 {
 
     private String APIkey = "";
+    
+    public URLstore()
+    {
+        APIkey = fileReader();
+    }
 
     public String summoner(String name, String region)
     {
@@ -22,7 +28,7 @@ public class URLstore
 
     public String champion(long id, String region)
     {
-        String url = "https://" + region + ".api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/"+id + "?api_key=" + APIkey;
+        String url = "https://" + region + ".api.riotgames.com/lol/champion-mastery/v3/champion-masteries/by-summoner/" + id + "?api_key=" + APIkey;
         return url;
     }
 
@@ -31,4 +37,28 @@ public class URLstore
         APIkey = key;
     }
 
+    public static String fileReader()
+    {
+        StringBuilder sb = new StringBuilder();
+        String strLine = "";
+        try
+        {
+            BufferedReader br = new BufferedReader(new FileReader("C:/Users/Public/Desktop/RIOT API KET.txt"));
+            while (strLine != null)
+            {
+                sb.append(strLine);
+                sb.append(System.lineSeparator());
+                strLine = br.readLine();
+                return strLine;
+            }
+            br.close();
+        } catch (FileNotFoundException e)
+        {
+            System.err.println("File not found");
+        } catch (IOException e)
+        {
+            System.err.println("Unable to read the file.");
+        }
+        return "";
+    }
 }
