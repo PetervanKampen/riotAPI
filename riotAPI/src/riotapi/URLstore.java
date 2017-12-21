@@ -43,7 +43,7 @@ public class URLstore
         String strLine = "";
         try
         {
-            BufferedReader br = new BufferedReader(new FileReader("C:/Users/Public/Desktop/RIOT API KET.txt"));
+            BufferedReader br = new BufferedReader(new FileReader("C:/Users/peter/Desktop/RIOT API KET.txt"));
             while (strLine != null)
             {
                 sb.append(strLine);
