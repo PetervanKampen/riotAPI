@@ -12,7 +12,7 @@ package riotapi;
 public class URLstore
 {
 
-    private String APIkey = "RGAPI-1a087187-8932-4415-8e16-aa6f1406cf55";
+    private String APIkey = "";
 
     public String summoner(String name, String region)
     {
