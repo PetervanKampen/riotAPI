@@ -33,47 +33,90 @@ public class GUI extends javax.swing.JFrame
     {
 
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        reset = new javax.swing.JButton();
         jComboBox1 = new javax.swing.JComboBox<>();
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
+        Summoner = new javax.swing.JButton();
+        champion = new javax.swing.JButton();
+        genData = new javax.swing.JButton();
+        masteryCount = new javax.swing.JSpinner();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton2.setText("Get my Data");
-        jButton2.addActionListener(new java.awt.event.ActionListener()
+        reset.setText("Clear Data");
+        reset.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jButton2ActionPerformed(evt);
+                resetActionPerformed(evt);
             }
         });
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NA1", "EUW1", "EUN1" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "EUW1", "EUN1", "NA1" }));
 
-        jTextField1.setText("Enter Name Here");
+        jTextField1.setText("petrovic258");
 
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jScrollPane1.setViewportView(jTextArea1);
+
+        Summoner.setText("Summoner Data");
+        Summoner.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                SummonerActionPerformed(evt);
+            }
+        });
+
+        champion.setText("Champion Mastery");
+        champion.setToolTipText("");
+        champion.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                championActionPerformed(evt);
+            }
+        });
+
+        genData.setText("Get New Data");
+        genData.setToolTipText("");
+        genData.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                genDataActionPerformed(evt);
+            }
+        });
+
+        masteryCount.setModel(new javax.swing.SpinnerNumberModel(3, 1, null, 1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jTextField1)
+                .addGap(3, 3, 3)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Summoner, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)))
+                        .addComponent(reset)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(genData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(champion)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(masteryCount)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -82,12 +125,20 @@ public class GUI extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2))
+                            .addComponent(genData))
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(Summoner)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(champion)
+                            .addComponent(masteryCount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(reset))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -95,8 +146,15 @@ public class GUI extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jButton2ActionPerformed
-    {//GEN-HEADEREND:event_jButton2ActionPerformed
+    private void resetActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_resetActionPerformed
+    {//GEN-HEADEREND:event_resetActionPerformed
+        jTextArea1.setText("");
+        api.champMastery = "";
+    }//GEN-LAST:event_resetActionPerformed
+
+    private void SummonerActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_SummonerActionPerformed
+    {//GEN-HEADEREND:event_SummonerActionPerformed
+        jTextArea1.setText("");
         api.setRegion(jComboBox1.getSelectedItem().toString().toLowerCase());
         api.setInputname(jTextField1.getText());
         try
@@ -104,9 +162,42 @@ public class GUI extends javax.swing.JFrame
             jTextArea1.setText(RiotAPI.summonerData());
         } catch (Exception e)
         {
-            System.out.println("We fucked up");
+            System.out.println("We fucked up: " + e.getMessage());
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_SummonerActionPerformed
+
+    private void championActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_championActionPerformed
+    {//GEN-HEADEREND:event_championActionPerformed
+        jTextArea1.setText("");
+        api.champMastery = "";
+        api.setRegion(jComboBox1.getSelectedItem().toString().toLowerCase());
+        api.setInputname(jTextField1.getText());
+        api.setChampAmount(masteryCount.getValue().toString());
+        try
+        {
+            RiotAPI.championData();
+            jTextArea1.setText(api.champMastery);
+        } catch (Exception e)
+        {
+            System.out.println("We fucked up: " + e.getMessage());
+
+        }
+    }//GEN-LAST:event_championActionPerformed
+
+    private void genDataActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_genDataActionPerformed
+    {//GEN-HEADEREND:event_genDataActionPerformed
+        jTextArea1.setText("");
+        api.champMastery = "";
+        api.setRegion(jComboBox1.getSelectedItem().toString().toLowerCase());
+        api.setInputname(jTextField1.getText());
+        try
+        {
+            String useless = RiotAPI.summonerData();
+        } catch (Exception e)
+        {
+            System.out.println("Data Initialized: " + e.getMessage());
+        }
+    }//GEN-LAST:event_genDataActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,11 +246,15 @@ public class GUI extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Summoner;
+    private javax.swing.JButton champion;
+    private javax.swing.JButton genData;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     private javax.swing.JTextField jTextField1;
+    private javax.swing.JSpinner masteryCount;
+    private javax.swing.JButton reset;
     // End of variables declaration//GEN-END:variables
 }
